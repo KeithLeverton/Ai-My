@@ -1,0 +1,28 @@
+﻿@page "/"
+@layout HomeLayout
+
+<PageTitle>Home</PageTitle>
+
+<div class="home-container">
+    <div class="welcome-section">
+        <h1>Welcome to My-Ai</h1>
+        <p class="lead">Choose a section to get started</p>
+    </div>
+
+    <details class="expandable-section" open>
+        <summary>Job Apps</summary>
+        <div class="page-tiles">
+            <a href="/CoverLetter" class="page-tile cover-letter-tile">
+                <div class="tile-icon">✉️</div>
+                <div class="tile-title">Cover Letter</div>
+                <div class="tile-description">Customise a cover letter</div>
+            </a>
+
+            <a href="/CustomiseCV" class="page-tile customise-cv-tile">
+                <div class="tile-icon">📄</div>
+                <div class="tile-title">Customise cv</div>
+                <div class="tile-description">Customise your cv to a job description</div>
+            </a>
+        </div>
+    </details>
+</div>

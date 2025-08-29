@@ -1,0 +1,10 @@
+/* Import component styles */
+@import url('components/home.css');
+@import url('components/tiles.css');
+
+/* Your existing global styles here */
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Add other global styles */
