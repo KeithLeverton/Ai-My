@@ -1,4 +1,4 @@
-﻿@page "/CoverLetter"
+﻿@page "/ColouringPage"
 @rendermode InteractiveServer
 @using My_Ai.Components.Shared
 @using My_Ai.Services
@@ -6,11 +6,11 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Http
 
-<PageTitle>Cover Letter</PageTitle>
+<PageTitle>Colouring Page</PageTitle>
 
-<Banner Title="Cover Letter"
-        Subtitle="Upload your CV and job description and get a customised cover letter"
-        BackgroundImageUrl='@Assets["images/jobhunting/pen-and-paper.jpg"]'
+<Banner Title="Colouring Page"
+        Subtitle="Upload an image to turn it into a black and white image to colour in"
+        BackgroundImageUrl='@Assets["images/artsandcrafts/paintbrushes.jpg"]'
         BackgroundPosition="center 30%"
         Overlay="rgba(0,0,0,.35)"
         MinHeight="200px"
@@ -18,40 +18,31 @@
 
 <div class="container py-3">
     <div class="mb-3">
-        <label for="jobDesc" class="form-label">Job description</label>
-        <InputTextArea id="jobDesc"
-                       class="form-control"
-                       rows="12"
-                       placeholder="Paste the job description here..."
-                       @bind-Value="jobDescription" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Upload your CV</label>
-        <InputFile OnChange="OnFileSelected" accept=".pdf,.docx,.txt" />
+        <label class="form-label">Upload your image</label>
+        <InputFile OnChange="OnFileSelected" accept=".jpg,.png" />
         @if (!string.IsNullOrEmpty(errorMessage))
         {
             <div class="alert alert-danger mt-2">@errorMessage</div>
         }
-        @if (cvFile != null)
+        @if (imageFile != null)
         {
             <div class="mt-2">
                 <small class="text-muted">
-                    Selected: @cvFile.Name (@(FormatFileSize(cvFile.Size)))
+                    Selected: @imageFile.Name (@(FormatFileSize(imageFile.Size)))
                 </small>
             </div>
         }
     </div>
 
-    <button class="btn btn-primary @(isProcessing ? "loading" : "")" @onclick="SubmitAsync" disabled="@(cvFile == null || isProcessing)">
+    <button class="btn btn-primary @(isProcessing ? "loading" : "")" @onclick="SubmitAsync" disabled="@(imageFile == null || isProcessing)">
         @if (isProcessing)
         {
             <span class="spinner-border spinner-border-sm me-2"></span>
-            <span class="btn-text">Generating Cover Letter...</span>
+            <span class="btn-text">Generating Colouring Page...</span>
         }
         else
         {
-            <span class="btn-text">Generate Cover Letter</span>
+            <span class="btn-text">Generate Colouring Page</span>
         }
     </button>
 
@@ -60,50 +51,47 @@
         <div class="card mt-3">
             <div class="card-header">Result</div>
             <div class="card-body">
-                @((MarkupString)result)
+                <img src="@result" class="img-fluid" alt="Colouring page result" />
             </div>
         </div>
     }
 </div>
 
-<LoadingSpinner IsVisible="@isProcessing" Message="Crafting your personalized cover letter..." />
+<LoadingSpinner IsVisible="@isProcessing" Message="Creating your colouring page..." />
 
 @code {
-    private string? jobDescription;
-    private IBrowserFile? cvFile;
+    private IBrowserFile? imageFile;
+    [Inject] private IProcessRequest Processor { get; set; } = default!;
     private string? result;
     private string? errorMessage;
     private bool isProcessing = false;
 
-    [Inject] private IProcessRequest Processor { get; set; } = default!;
-
     private void OnFileSelected(InputFileChangeEventArgs e)
     {
         errorMessage = null;
-        isProcessing = true;
-        cvFile = e.File;
+        imageFile = e.File;
         
         // Validate file size
         const long maxFileSize = 10 * 1024 * 1024; // 10MB
-        if (cvFile.Size > maxFileSize)
+        if (imageFile.Size > maxFileSize)
         {
             errorMessage = $"File is too large. Maximum size is {FormatFileSize(maxFileSize)}.";
-            cvFile = null;
+            imageFile = null;
             return;
         }
 
-        var allowedTypes = new[] { "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "text/plain" };
-        if (!allowedTypes.Contains(cvFile.ContentType))
+        var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png" };
+        if (!allowedTypes.Contains(imageFile.ContentType.ToLower()))
         {
-            errorMessage = "Please select a PDF, DOCX, or TXT file.";
-            cvFile = null;
+            errorMessage = "Please select a JPEG or PNG image file.";
+            imageFile = null;
             return;
         }
     }
 
     private async Task SubmitAsync()
     {
-        if (cvFile is null)
+        if (imageFile is null)
             return;
 
         isProcessing = true;
@@ -114,19 +102,18 @@
         try
         {
             // Copy to a seekable stream
-            await using var browserStream = cvFile.OpenReadStream(10 * 1024 * 1024);
+            await using var browserStream = imageFile.OpenReadStream(10 * 1024 * 1024);
             using var ms = new MemoryStream();
             await browserStream.CopyToAsync(ms);
             ms.Position = 0;
 
-            var formFile = new FormFile(ms, 0, ms.Length, "file", cvFile.Name)
+            var formFile = new FormFile(ms, 0, ms.Length, "file", imageFile.Name)
             {
                 Headers = new HeaderDictionary(),
-                ContentType = cvFile.ContentType
+                ContentType = imageFile.ContentType
             };
 
-            result = await Processor.ProcessWordDocumentAsync(formFile, Prompts.GenerateCoverLetter, jobDescription);
-            result = HtmlConverter.ReWriteHtml(result);
+            result = await Processor.ProcessImageAsync(formFile, Prompts.PaintByNumbers);
         }
         catch (Exception ex)
         {

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+
+<NavLink class="nav-link" href="@Href" Match="@Match">
+    @if (Icon is not null)
+    {
+        <span class="nav-icon">@Icon</span>
+    }
+    else if (!string.IsNullOrWhiteSpace(IconClass))
+    {
+        <span class="@IconClass" aria-hidden="true"></span>
+    }
+    else if (!string.IsNullOrWhiteSpace(IconEmoji))
+    {
+        <span class="nav-emoji" aria-hidden="true">@IconEmoji</span>
+    }
+    @Text
+</NavLink>
+
+@code {
+    [Parameter] public string Href { get; set; } = "";
+    [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+    [Parameter] public string Text { get; set; } = "";
+
+    // Choose one of the following ways to provide an icon:
+    [Parameter] public string? IconClass { get; set; }     // e.g. "bi bi-house-door-fill-nav-menu"
+    [Parameter] public string? IconEmoji { get; set; }     // e.g. "📎"
+    [Parameter] public RenderFragment? Icon { get; set; }  // e.g. <img src="..." class="nav-icon-img" />
+}

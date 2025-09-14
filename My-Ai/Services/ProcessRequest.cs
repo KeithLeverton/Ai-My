@@ -5,13 +5,15 @@ namespace My_Ai.Services
 {
     public class ProcessRequest : IProcessRequest
     {
-        IGeminiClient _geminiClient;
-        public ProcessRequest(IGeminiClient geminiClient)
+        IClient _client;
+        IImageClient _imageClient;
+        public ProcessRequest(IClient client, IImageClient imageClient)
         {
-            _geminiClient = geminiClient;
+            _client = client;
+            _imageClient = imageClient;
         }
 
-        public async Task<string> ProcessFileAsync(IFormFile file, string prompt, string? additionalInfo = null)
+        public async Task<string> ProcessWordDocumentAsync(IFormFile file, string prompt, string? additionalInfo = null)
         {
             CheckFile(file);
             if (additionalInfo != null)
@@ -20,12 +22,12 @@ namespace My_Ai.Services
             }
             try
             {
-                var response = await _geminiClient.GenerateResponse(prompt, file);
-                return !string.IsNullOrEmpty(response.Text) ? response.Text : "Error generating response from Gemini AI.";
+                var response = await _client.GenerateResponse(prompt, file);
+                return !string.IsNullOrEmpty(response) ? response : "Error generating response from client.";
             }
             catch (Exception ex)
             {
-                throw new Exception("Error generating response from Gemini AI.", ex);
+                throw new Exception("Error generating response from client.", ex);
             }
         }
 
@@ -40,12 +42,30 @@ namespace My_Ai.Services
 
             try
             {
-                var response = await _geminiClient.GenerateResponse(prompt);
-                return !string.IsNullOrEmpty(response.Text) ? response.Text : "Error generating response from Gemini AI.";
+                var response = await _client.GenerateResponse(prompt);
+                return !string.IsNullOrEmpty(response) ? response : "Error generating response from client.";
             }
             catch (Exception ex)
             {
-                throw new Exception("Error generating response from Gemini AI.", ex);
+                throw new Exception("Error generating response from client.", ex);
+            }
+        }
+
+        public async Task<string> ProcessImageAsync(IFormFile file, string prompt, string? additionalInfo = null)
+        {
+            CheckFile(file);
+            if (additionalInfo != null)
+            {
+                prompt = GeneratePrompt(prompt, additionalInfo);
+            }
+            try
+            {
+                var response = await _imageClient.GenerateResponse(file, prompt);
+                return !string.IsNullOrEmpty(response) ? response : "Error generating response from client.";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error generating response from client.", ex);
             }
         }
 

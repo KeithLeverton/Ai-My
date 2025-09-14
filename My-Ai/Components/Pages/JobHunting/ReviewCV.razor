@@ -1,0 +1,64 @@
+﻿@page "/ReviewCV"
+@rendermode InteractiveServer
+@using My_Ai.Components.Shared
+@using My_Ai.Services
+@using My_Ai.Util
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Http
+
+<PageTitle>Cover Letter</PageTitle>
+
+<Banner Title="Customise Your CV"
+        Subtitle="Upload your CV and get actionable feedback"
+        BackgroundImageUrl='@Assets["images/jobhunting/pen-and-paper.jpg"]'
+        BackgroundPosition="center 30%"
+        Overlay="rgba(0,0,0,.35)"
+        MinHeight="200px"
+        PaddingY="2rem" />
+
+<div class="container py-3">
+    <div class="mb-3">
+        <label class="form-label">Upload your CV</label>
+        <InputFile OnChange="(e => cvFile = e.File)" accept=".pdf,.docx,.txt" />
+    </div>
+
+    <button class="btn btn-primary" @onclick="SubmitAsync">Review your CV</button>
+
+    @if (!string.IsNullOrWhiteSpace(result))
+    {
+        <div class="card mt-3">
+            <div class="card-header">Result</div>
+            <div class="card-body">
+                @((MarkupString)result)
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private IBrowserFile? cvFile;
+    private string? result;
+
+    [Inject] private IProcessRequest Processor { get; set; } = default!;
+
+    private async Task SubmitAsync()
+    {
+        if (cvFile is null)
+            return;
+
+        // Copy to a seekable stream
+        await using var browserStream = cvFile.OpenReadStream(10 * 1024 * 1024);
+        using var ms = new MemoryStream();
+        await browserStream.CopyToAsync(ms);
+        ms.Position = 0;
+
+        var formFile = new FormFile(ms, 0, ms.Length, "file", cvFile.Name)
+        {
+            Headers = new HeaderDictionary(),
+            ContentType = cvFile.ContentType
+        };
+
+        result = await Processor.ProcessWordDocumentAsync(formFile, Prompts.ImproveCv);
+        result = HtmlConverter.ReWriteHtml(result);
+    }
+}

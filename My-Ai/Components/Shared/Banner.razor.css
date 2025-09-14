@@ -1,0 +1,86 @@
+.banner {
+    position: relative;
+    display: flex; /* allow vertical alignment inside */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: var(--banner-padding-y, 1.25rem) 1.5rem;
+    min-height: var(--banner-height, auto);
+    margin: 0 0 1rem 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    overflow: hidden;
+}
+
+.banner-has-image {
+    background: none;
+}
+
+.banner-has-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--banner-overlay), var(--banner-bg);
+    background-position: center, var(--banner-bg-position, center);
+    background-size: cover, var(--banner-bg-size, cover);
+    background-repeat: no-repeat, no-repeat;
+    z-index: 0;
+}
+
+.banner-inner,
+.banner-content {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-inner {
+    /* fill the banner height and align content to bottom */
+    display: flex;
+    align-items: flex-end;          /* bottom-align vertically */
+    justify-content: space-between; /* space between title and actions */
+    gap: 1rem;
+    width: 100%;
+    min-height: var(--banner-height, auto); /* respects MinHeight if set */
+}
+
+.banner-main {
+    display: flex;
+    align-items: flex-end; /* bottom-align icon with text block */
+    gap: 0.85rem;
+}
+
+.banner-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
+.banner-title {
+    margin: 0;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.banner-subtitle {
+    margin: 0.15rem 0 0 0;
+    opacity: 0.9;
+}
+
+.banner-actions ::deep > * + * {
+    margin-left: 0.5rem;
+}
+
+.banner-content {
+    margin-top: 0.75rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .banner {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    .banner-title {
+        font-size: 1.4rem;
+    }
+}

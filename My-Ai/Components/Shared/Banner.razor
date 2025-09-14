@@ -1,0 +1,77 @@
+<section class="@BannerClass" style="@BannerStyle">
+    <div class="banner-inner">
+        <div class="banner-main">
+            @if (!string.IsNullOrWhiteSpace(Icon))
+            {
+                <span class="banner-icon">@Icon</span>
+            }
+            <div>
+                <h1 class="banner-title">@Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Subtitle))
+                {
+                    <p class="banner-subtitle">@Subtitle</p>
+                }
+            </div>
+        </div>
+
+        @if (Actions is not null)
+        {
+            <div class="banner-actions">
+                @Actions
+            </div>
+        }
+    </div>
+
+    @if (ChildContent is not null)
+    {
+        <div class="banner-content">
+            @ChildContent
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public string? Icon { get; set; }
+    [Parameter] public RenderFragment? Actions { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    // Background image support
+    [Parameter] public string? BackgroundImageUrl { get; set; }
+    [Parameter] public string BackgroundPosition { get; set; } = "center";
+    [Parameter] public string BackgroundSize { get; set; } = "cover";
+    [Parameter] public string Overlay { get; set; } = "rgba(0,0,0,.35)";
+
+    // Sizing controls
+    [Parameter] public string? MinHeight { get; set; } // e.g. "260px", "30vh"
+    [Parameter] public string? PaddingY { get; set; }  // e.g. "2.5rem"
+
+    private bool HasImage => !string.IsNullOrWhiteSpace(BackgroundImageUrl);
+
+    private string BannerClass => $"banner{(HasImage ? " banner-has-image" : string.Empty)}";
+
+    private string BannerStyle
+    {
+        get
+        {
+            var parts = new List<string>(6);
+
+            if (HasImage)
+            {
+                parts.Add($"--banner-bg:url('{BackgroundImageUrl}')");
+                parts.Add($"--banner-bg-position:{BackgroundPosition}");
+                parts.Add($"--banner-bg-size:{BackgroundSize}");
+                parts.Add($"--banner-overlay:linear-gradient(0deg, {Overlay}, {Overlay})");
+            }
+
+            if (!string.IsNullOrWhiteSpace(MinHeight))
+                parts.Add($"--banner-height:{MinHeight}");
+
+            if (!string.IsNullOrWhiteSpace(PaddingY))
+                parts.Add($"--banner-padding-y:{PaddingY}");
+
+            return string.Join("; ", parts);
+        }
+    }
+}
