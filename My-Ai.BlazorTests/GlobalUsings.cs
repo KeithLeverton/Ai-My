@@ -1,0 +1,11 @@
+global using Xunit;
+global using Bunit;
+global using Microsoft.Extensions.DependencyInjection;
+global using AngleSharp.Dom;
+global using System;
+global using System.Linq;
+global using My_Ai.Components.Pages;
+global using My_Ai.Components.Pages.ArtsAndCrafts;
+global using My_Ai.Components.Pages.JobHunting;
+global using My_Ai.Components.Layout;
+global using My_Ai.Services;

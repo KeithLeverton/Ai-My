@@ -1,0 +1,5 @@
+{
+  "ASPNETCORE_ENVIRONMENT": "Production",
+  "ASPNETCORE_URLS": "http://+:8080",
+  "DOTNET_RUNNING_IN_CONTAINER": "true"
+}

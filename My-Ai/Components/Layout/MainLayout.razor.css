@@ -6,6 +6,8 @@
 
 main {
     flex: 1;
+    display: flex;           /* make footer stick to bottom of the content pane */
+    flex-direction: column;
 }
 
 .sidebar {
@@ -21,20 +23,25 @@ main {
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+.top-row ::deep a, .top-row ::deep .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+    text-decoration: none;
+}
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+.top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+    text-decoration: underline;
+}
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row ::deep a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Body grows to push footer down */
+article.content {
+    flex: 1;
+}
 
 @media (max-width: 640.98px) {
     .top-row {
@@ -90,9 +97,27 @@ main {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+/* Footer styling */
+.app-footer {
+    border-top: 1px solid #e9ecef;
+    padding: .75rem 0 1rem 0;
+    margin-top: 1rem;
+    color: #6c757d;
+    font-size: .875rem;
+}
+
+.app-footer a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.app-footer a:hover {
+    text-decoration: none;
+}

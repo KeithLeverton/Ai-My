@@ -8,7 +8,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // minimal DI
-builder.Services.AddScoped<IGeminiClient, GeminiClient>();
+builder.Services.AddScoped<IClient, ChatGPTClient>();
+builder.Services.AddScoped<IImageClient, OpenAIImageGenerationClient>();    
 builder.Services.AddScoped<IProcessRequest, ProcessRequest>();
 
 var app = builder.Build();

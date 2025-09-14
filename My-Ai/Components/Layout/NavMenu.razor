@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">My-Ai</a>
+        <a class="navbar-brand" href="">Ai-My</a>
     </div>
 </div>
 
@@ -8,27 +8,36 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <details class="nav-item px-3" open>
+        <details class="nav-item px-1" open>
             <summary class="nav-link text-light">
                 <span class="bi bi-briefcase-fill" aria-hidden="true"></span> Job Apps
             </summary>
             <div class="ps-3">
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="CoverLetter">
-                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Cover Letter
-                    </NavLink>
+                <div class="nav-item px-2">
+                    <NavMenuLink Href="reviewcv" Text="Review CV" IconEmoji="📎" />
                 </div>
 
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="customisecv">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Customise CV
-                    </NavLink>
+                <div class="nav-item px-2">
+                    <NavMenuLink Href="CoverLetter" Text="Cover Letter" IconEmoji="✉️" />
+                </div>
+
+                <div class="nav-item px-2">
+                    <NavMenuLink Href="customisecv" Text="Customise CV" IconEmoji="📄" />
+                </div>
+            </div>
+        </details>
+    </nav>
+    <nav class="nav flex-column">
+        <details class="nav-item px-1" open>
+            <summary class="nav-link text-light">
+                <span class="bi bi-briefcase-fill" aria-hidden="true"></span> Arts and Crafts Apps
+            </summary>
+            <div class="ps-3">
+                <div class="nav-item px-2">
+                    <NavMenuLink Href="ColouringPage" Text="Colouring Page" IconEmoji="🖼️" />
+                </div>
+                <div class="nav-item px-2">
+                    <NavMenuLink Href="SowingPattern" Text="Sowing Pattern" IconEmoji="✂️" />
                 </div>
             </div>
         </details>
