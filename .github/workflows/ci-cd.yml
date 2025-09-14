@@ -8,7 +8,7 @@ on:
 
 env:
   DOTNET_VERSION: '9.0.x'
-  AZURE_WEBAPP_NAME: 'your-app-service-name'    # Replace with your Azure App Service name
+  AZURE_WEBAPP_NAME: 'Ai-My'    # Replace with your Azure App Service name
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
   PROJECT_PATH: './My-Ai/Ai-My.csproj'
 
