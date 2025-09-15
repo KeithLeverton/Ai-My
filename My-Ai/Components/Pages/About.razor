@@ -1,32 +1,51 @@
 ﻿@page "/about"
 @rendermode InteractiveServer
 
-<PageTitle>About the team</PageTitle>
+<PageTitle>About the Team - Ai-My</PageTitle>
+<meta name="description" content="Meet the team behind Ai-My - AI-powered tools for CV optimization and creative projects." />
 
-<h1>About the team</h1>
+<div class="about-container">
+    <header>
+        <h1>About the Team</h1>
+    </header>
 
-<section class="about-media-list">
-    <article class="about-media">
-        <img src='@Assets["images/about/KeithLeverton.jpg"]' alt="Keith Leverton" />
-        <div class="about-media-body">
-            <h2>Keith Leverton</h2>
-            <p>
-                Lead Developer. Lead Architect. Lead QA. Lead Platform Engineer. Lead Scrum Master. Lead Project Manager.
+    <section class="about-media-list" role="main">
+        <article class="about-media">
+            <img src='@Assets["images/about/KeithLeverton.jpg"]' 
+                 alt="Keith Leverton, Lead Developer and Architect" 
+                 loading="lazy"
+                 width="200" 
+                 height="200" />
+            <div class="about-media-body">
+                <h2>Keith Leverton</h2>
+                <p>
+                    Lead Developer, Lead Architect, Lead QA, Lead Platform Engineer, Lead Scrum Master, Lead Project Manager.
+                </p>
+            </div>
+        </article>
+
+        <article class="about-media">
+            <img src='@Assets["images/about/ShahnazAhmad.jpg"]' 
+                 alt="Shahnaz Ahmad, Director of Whimsy" 
+                 loading="lazy"
+                 width="200" 
+                 height="200" />
+            <div class="about-media-body">
+                <h2>Shahnaz Ahmad</h2>
+                <p>
+                    Director of Whimsy
+                </p>
+            </div>
+        </article>
+        
+        <section class="contact-section">
+            <h2>Get in Touch</h2>
+            <p>If you would like to provide feedback or make suggestions please contact us at 
+               <a href="mailto:feedback@ai-my.co.uk" aria-label="Send email to feedback at ai-my.co.uk">feedback@ai-my.co.uk</a>
             </p>
-        </div>
-    </article>
-
-    <article class="about-media">
-        <img src='@Assets["images/about/ShahnazAhmad.jpg"]' alt="Shahnaz Ahmad" />
-        <div class="about-media-body">
-            <h2>Shahnaz Ahmad</h2>
-            <p>
-                Director of Whimsy
-            </p>
-        </div>
-    </article>
-    <p>If you would like to provide feedback or make suggestions please contact us at <a href="mailto:feedback@ai-my.co.uk">feedback@ai-my.co.uk</a></p>
-</section>
+        </section>
+    </section>
+</div>
 
 @code {
     // Add/modify text and image filenames as needed. Place images under wwwroot/images.

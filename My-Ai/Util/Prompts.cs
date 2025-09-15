@@ -49,7 +49,7 @@ A simple coloring page of a sitting dog. The dog is outlined with bold lines, an
 **REMINDER:**  
 Your goal is to produce a simple, uncluttered line-art version of the photo, ready for children to color, with only essential shapes and outlines.";
 
-        public static string SowingPrompt = @"Convert this garment into a detailed sewing pattern. Extract the structure of the clothing and redraw it as flat pattern pieces with clean black line art on a white background. Show front and back pieces, sleeves, collars, and any additional components. Include seam allowances, grainline arrows, notches, and fold lines. Present the output as a professional sewing pattern sheet, clearly labeled for cutting and assembly.";
+        public static string sewingPrompt = @"Convert this garment into a detailed sewing pattern. Extract the structure of the clothing and redraw it as flat pattern pieces with clean black line art on a white background. Show front and back pieces, sleeves, collars, and any additional components. Include seam allowances, grainline arrows, notches, and fold lines. Present the output as a professional sewing pattern sheet, clearly labeled for cutting and assembly.";
     }
 
     

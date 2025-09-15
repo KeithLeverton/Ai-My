@@ -12,7 +12,7 @@ namespace My_Ai.Tests.Util
             Assert.NotNull(Prompts.CustomiseCv);
             Assert.NotNull(Prompts.GenerateCoverLetter);
             Assert.NotNull(Prompts.PaintByNumbers);
-            Assert.NotNull(Prompts.SowingPrompt);
+            Assert.NotNull(Prompts.sewingPrompt);
         }
 
         [Fact]
@@ -49,12 +49,12 @@ namespace My_Ai.Tests.Util
         }
 
         [Fact]
-        public void SowingPrompt_ContainsExpectedContent()
+        public void sewingPrompt_ContainsExpectedContent()
         {
             // Assert
-            Assert.Contains("sewing pattern", Prompts.SowingPrompt);
-            Assert.Contains("garment", Prompts.SowingPrompt);
-            Assert.Contains("pattern pieces", Prompts.SowingPrompt);
+            Assert.Contains("sewing pattern", Prompts.sewingPrompt);
+            Assert.Contains("garment", Prompts.sewingPrompt);
+            Assert.Contains("pattern pieces", Prompts.sewingPrompt);
         }
     }
 }

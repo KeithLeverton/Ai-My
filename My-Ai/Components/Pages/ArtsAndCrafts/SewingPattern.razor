@@ -1,4 +1,4 @@
-﻿@page "/SowingPattern"
+﻿@page "/sewingPattern"
 @rendermode InteractiveServer
 @using My_Ai.Components.Shared
 @using My_Ai.Services
@@ -6,10 +6,10 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Http
 
-<PageTitle>SowingPattern</PageTitle>
+<PageTitle>sewingPattern</PageTitle>
 
-<Banner Title="Sowing Pattern"
-        Subtitle="Upload an image of clothes to turn it into a sowing pattern"
+<Banner Title="sewing Pattern"
+        Subtitle="Upload an image of clothes to turn it into a sewing pattern"
         BackgroundImageUrl='@Assets["images/artsandcrafts/paintbrushes.jpg"]'
         BackgroundPosition="center 30%"
         Overlay="rgba(0,0,0,.35)"
@@ -38,11 +38,11 @@
         @if (isProcessing)
         {
             <span class="spinner-border spinner-border-sm me-2"></span>
-            <span class="btn-text">Generating Sowing Pattern...</span>
+            <span class="btn-text">Generating sewing Pattern...</span>
         }
         else
         {
-            <span class="btn-text">Generate Sowing Pattern</span>
+            <span class="btn-text">Generate sewing Pattern</span>
         }
     </button>
 
@@ -51,7 +51,7 @@
         <div class="card mt-3">
             <div class="card-header">Result</div>
             <div class="card-body">
-                <img src="@result" class="img-fluid" alt="Sowing pattern result" />
+                <img src="@result" class="img-fluid" alt="sewing pattern result" />
             </div>
         </div>
     }
@@ -113,7 +113,7 @@
                 ContentType = imageFile.ContentType
             };
 
-            result = await Processor.ProcessImageAsync(formFile, Prompts.SowingPrompt);
+            result = await Processor.ProcessImageAsync(formFile, Prompts.sewingPrompt);
         }
         catch (Exception ex)
         {
