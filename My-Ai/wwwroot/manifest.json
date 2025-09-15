@@ -1,0 +1,25 @@
+{
+    "name": "Ai-My - AI-Powered Tools",
+    "short_name": "Ai-My",
+    "description": "AI-powered tools for CV optimization, cover letters, and creative projects",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#667eea",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["productivity", "utilities", "business"]
+}

@@ -4,30 +4,58 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-powered tools for CV optimization, cover letters, and creative projects. Improve your job applications with AI assistance." />
+    <meta name="keywords" content="AI, CV, resume, cover letter, job applications, coloring pages, sewing patterns" />
+    <meta name="author" content="Ai-My" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    
     <base href="/" />
-    <link rel="stylesheet" href='@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]' />
+    
+    <!-- Optimize CSS loading -->
+    <link rel="preload" href='@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]' as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href='@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]' /></noscript>
+    
     <link rel="stylesheet" href='@Assets["app.css"]' />
     <link rel="stylesheet" href='@Assets["Ai-My.styles.css"]' />
-    <ImportMap />
-    <link rel="icon" type="image/png" href='@Assets["favicon.png"]' />
     
-    <!-- Google AdSense -->
+    <ImportMap />
+    
+    <!-- Optimized favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href='@Assets["favicon.png"]' />
+    <link rel="apple-touch-icon" href='@Assets["favicon.png"]' />
+    
+    <!-- Google AdSense with improved loading -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9127498419225547"
             crossorigin="anonymous"></script>
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#667eea" />
     
     <HeadOutlet />
 </head>
 
 <body>
-    <Routes />
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+    
+    <main id="main-content">
+        <Routes />
+    </main>
 
     <div id="blazor-error-ui" data-nosnippet>
-        An unhandled error has occurred.
+        An error has occurred.
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
 
-    <script src="_framework/blazor.web.js"></script>
+    <!-- Blazor script with defer for better performance -->
+    <script src="_framework/blazor.web.js" defer></script>
 </body>
 
 </html>

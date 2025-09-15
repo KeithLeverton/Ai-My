@@ -1,0 +1,30 @@
+/* Add to the end of app.css */
+
+/* Optimize font loading */
+@font-display: swap;
+
+/* Optimize images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Optimize animations */
+.page-tile {
+    will-change: transform;
+}
+
+.page-tile:hover {
+    transform: translateY(-5px) translateZ(0); /* Add translateZ for hardware acceleration */
+}
+
+/* Optimize critical rendering path */
+.home-container {
+    contain: layout style paint;
+}
+
+/* Optimize scrolling */
+.nav-scrollable {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}

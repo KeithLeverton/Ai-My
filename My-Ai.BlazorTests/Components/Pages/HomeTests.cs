@@ -38,7 +38,7 @@ namespace My_Ai.BlazorTests.Components.Pages
             // Assert
             Assert.Contains("Arts and Crafts Applications", component.Markup);
             Assert.Contains("Colouring page", component.Markup);
-            Assert.Contains("Sowing Pattern", component.Markup);
+            Assert.Contains("sewing Pattern", component.Markup);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace My_Ai.BlazorTests.Components.Pages
             Assert.Contains("✉️", component.Markup); // Cover Letter
             Assert.Contains("📄", component.Markup); // Customise CV
             Assert.Contains("🖼️", component.Markup); // Colouring Page
-            Assert.Contains("✂️", component.Markup); // Sowing Pattern
+            Assert.Contains("✂️", component.Markup); // sewing Pattern
         }
 
         [Fact]

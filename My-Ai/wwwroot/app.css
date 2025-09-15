@@ -366,6 +366,14 @@ h1:focus {
     background: linear-gradient(135deg, #ff5252 0%, #d63031 100%) !important; /* Darker on hover */
 }
 
+.sewing-page-tile {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%) !important; /* Orange/Red gradient */
+}
+
+.sewing-page-tile:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #d63031 100%) !important; /* Darker on hover */
+}
+
 /* Job Applications Section Styling */
 .job-applications-section summary {
     background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); /* Dark gray gradient */

@@ -1,52 +1,57 @@
 ﻿@page "/"
 @layout HomeLayout
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Ai-My - AI-Powered CV and Creative Tools</PageTitle>
 
 <div class="home-container">
-    <div class="welcome-section">
+    <header class="welcome-section">
         <h1>Welcome to Ai-My</h1>
-        <p class="lead">Choose a tile to get started</p>
-    </div>
+        <p class="lead">Choose a service below to get started with AI-powered assistance</p>
+    </header>
 
-    <details class="expandable-section job-applications-section" open>
-        <summary>Job Applications</summary>
-        <div class="page-tiles">
-            <a href="/ReviewCV" class="page-tile review-cv-tile">
-                <div class="tile-icon">📎</div>
-                <div class="tile-title">Review your CV</div>
-                <div class="tile-description">Review your CV</div>
-            </a>
+    <section class="services-section">
+        <details class="expandable-section job-applications-section" open>
+            <summary role="button" aria-expanded="true" aria-controls="job-apps-content">
+                <span class="section-title">Job Applications</span>
+            </summary>
+            <div id="job-apps-content" class="page-tiles" role="region" aria-labelledby="job-apps-summary">
+                <a href="/ReviewCV" class="page-tile review-cv-tile" aria-describedby="review-cv-desc">
+                    <div class="tile-icon" aria-hidden="true">📎</div>
+                    <div class="tile-title">Review your CV</div>
+                    <div class="tile-description" id="review-cv-desc">Get AI-powered feedback to improve your CV</div>
+                </a>
 
-            <a href="/CoverLetter" class="page-tile cover-letter-tile">
-                <div class="tile-icon">✉️</div>
-                <div class="tile-title">Cover Letter</div>
-                <div class="tile-description">Customise a cover letter</div>
-            </a>
+                <a href="/CoverLetter" class="page-tile cover-letter-tile" aria-describedby="cover-letter-desc">
+                    <div class="tile-icon" aria-hidden="true">✉️</div>
+                    <div class="tile-title">Cover Letter</div>
+                    <div class="tile-description" id="cover-letter-desc">Create customized cover letters for job applications</div>
+                </a>
 
-            <a href="/CustomiseCV" class="page-tile customise-cv-tile">
-                <div class="tile-icon">📄</div>
-                <div class="tile-title">Customise cv</div>
-                <div class="tile-description">Customise your cv to a job description</div>
-            </a>
+                <a href="/CustomiseCV" class="page-tile customise-cv-tile" aria-describedby="customise-cv-desc">
+                    <div class="tile-icon" aria-hidden="true">📄</div>
+                    <div class="tile-title">Customise CV</div>
+                    <div class="tile-description" id="customise-cv-desc">Tailor your CV to specific job descriptions</div>
+                </a>
+            </div>
+        </details>
 
-        </div>
-    </details>
+        <details class="expandable-section arts-and-crafts-section" open>
+            <summary role="button" aria-expanded="true" aria-controls="arts-crafts-content">
+                <span class="section-title">Arts and Crafts Applications</span>
+            </summary>
+            <div id="arts-crafts-content" class="page-tiles" role="region" aria-labelledby="arts-crafts-summary">
+                <a href="/ColouringPage" class="page-tile colouring-page-tile" aria-describedby="coloring-desc">
+                    <div class="tile-icon" aria-hidden="true">🖼️</div>
+                    <div class="tile-title">Colouring Page</div>
+                    <div class="tile-description" id="coloring-desc">Transform photos into printable coloring pages</div>
+                </a>
 
-    <details class="expandable-section arts-and-crafts-section" open>
-        <summary>Arts and Crafts Applications</summary>
-        <div class="page-tiles">
-            <a href="/ColouringPage" class="page-tile colouring-page-tile">
-                <div class="tile-icon">🖼️</div>
-                <div class="tile-title">Colouring page</div>
-                <div class="tile-description">Create a colouring page from a picture</div>
-            </a>
-
-            <a href="/SowingPattern" class="page-tile sowing-pattern-tile">
-                <div class="tile-icon">✂️</div>
-                <div class="tile-title">Sowing Pattern</div>
-                <div class="tile-description">Create a sowing patter from a picutre of clothes</div>
-            </a>
-        </div>
-    </details>
+                <a href="/SewingPattern" class="page-tile sewing-page-tile" aria-describedby="sewing-desc">
+                    <div class="tile-icon" aria-hidden="true">✂️</div>
+                    <div class="tile-title">Sewing Pattern</div>
+                    <div class="tile-description" id="sewing-desc">Create sewing patterns from clothing images</div>
+                </a>
+            </div>
+        </details>
+    </section>
 </div>
