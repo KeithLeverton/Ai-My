@@ -13,7 +13,7 @@ namespace My_Ai.BlazorTests.Components.Pages
 
             // Assert
             Assert.Contains("Welcome to Ai-My", component.Markup);
-            Assert.Contains("Choose a tile to get started", component.Markup);
+            Assert.Contains("Choose a service below to get started", component.Markup);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace My_Ai.BlazorTests.Components.Pages
             Assert.Contains("Job Applications", component.Markup);
             Assert.Contains("Review your CV", component.Markup);
             Assert.Contains("Cover Letter", component.Markup);
-            Assert.Contains("Customise cv", component.Markup);
+            Assert.Contains("Customise CV", component.Markup); // Fixed: Changed from "Customise cv" to "Customise CV"
         }
 
         [Fact]
@@ -37,8 +37,8 @@ namespace My_Ai.BlazorTests.Components.Pages
 
             // Assert
             Assert.Contains("Arts and Crafts Applications", component.Markup);
-            Assert.Contains("Colouring page", component.Markup);
-            Assert.Contains("sewing Pattern", component.Markup);
+            Assert.Contains("Colouring Page", component.Markup); // Fixed: Changed from "Colouring page" to "Colouring Page"
+            Assert.Contains("Sewing Pattern", component.Markup); // Fixed: Changed from "sewing Pattern" to "Sewing Pattern"
         }
 
         [Fact]
@@ -47,16 +47,18 @@ namespace My_Ai.BlazorTests.Components.Pages
             // Act
             var component = RenderComponent<Home>();
 
-            // Assert - Note: In Home.razor, there are two links pointing to ColouringPage
+            // Assert
             var reviewCvLink = component.Find("a[href='/ReviewCV']");
             var coverLetterLink = component.Find("a[href='/CoverLetter']");
             var customiseCvLink = component.Find("a[href='/CustomiseCV']");
-            var colouringPageLinks = component.FindAll("a[href='/ColouringPage']");
+            var colouringPageLink = component.Find("a[href='/ColouringPage']");
+            var sewingPatternLink = component.Find("a[href='/SewingPattern']"); // Fixed: Added missing sewing pattern link
 
             Assert.NotNull(reviewCvLink);
             Assert.NotNull(coverLetterLink);
             Assert.NotNull(customiseCvLink);
-            Assert.True(colouringPageLinks.Count >= 1); // At least one ColouringPage link
+            Assert.NotNull(colouringPageLink);
+            Assert.NotNull(sewingPatternLink);
         }
 
         [Fact]
@@ -70,7 +72,7 @@ namespace My_Ai.BlazorTests.Components.Pages
             Assert.Contains("✉️", component.Markup); // Cover Letter
             Assert.Contains("📄", component.Markup); // Customise CV
             Assert.Contains("🖼️", component.Markup); // Colouring Page
-            Assert.Contains("✂️", component.Markup); // sewing Pattern
+            Assert.Contains("✂️", component.Markup); // Sewing Pattern
         }
 
         [Fact]
@@ -85,6 +87,30 @@ namespace My_Ai.BlazorTests.Components.Pages
             
             Assert.NotNull(jobSection);
             Assert.NotNull(artsSection);
+        }
+
+        [Fact]
+        public void Home_HasAccessibilityFeatures()
+        {
+            // Act
+            var component = RenderComponent<Home>();
+
+            // Assert - Check for accessibility improvements
+            Assert.Contains("role=\"button\"", component.Markup);
+            Assert.Contains("aria-expanded", component.Markup);
+            Assert.Contains("aria-describedby", component.Markup);
+        }
+
+        [Fact]
+        public void Home_HasSemanticStructure()
+        {
+            // Act
+            var component = RenderComponent<Home>();
+
+            // Assert - Check for semantic HTML structure
+            Assert.Contains("<header", component.Markup);
+            Assert.Contains("<section", component.Markup);
+            Assert.Contains("services-section", component.Markup);
         }
     }
 }
