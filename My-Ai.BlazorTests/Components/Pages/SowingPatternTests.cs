@@ -3,13 +3,13 @@ using My_Ai.Components.Pages.ArtsAndCrafts;
 
 namespace My_Ai.BlazorTests.Components.Pages
 {
-    public class sewingPatternTests : TestBase
+    public class SewingPatternTests : TestBase
     {
         [Fact]
-        public void sewingPattern_RendersCorrectly()
+        public void SewingPattern_RendersCorrectly()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert - Check for main content that should be present
             Assert.Contains("Upload your image", component.Markup);
@@ -17,10 +17,10 @@ namespace My_Ai.BlazorTests.Components.Pages
         }
 
         [Fact]
-        public void sewingPattern_HasFileUpload()
+        public void SewingPattern_HasFileUpload()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert
             var fileInput = component.Find("input[type='file']");
@@ -29,10 +29,10 @@ namespace My_Ai.BlazorTests.Components.Pages
         }
 
         [Fact]
-        public void sewingPattern_SubmitButtonInitiallyDisabled()
+        public void SewingPattern_SubmitButtonInitiallyDisabled()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert
             var submitButton = component.Find("button");
@@ -40,30 +40,30 @@ namespace My_Ai.BlazorTests.Components.Pages
         }
 
         [Fact]
-        public void sewingPattern_HasLoadingSpinnerComponent()
+        public void SewingPattern_HasLoadingSpinnerComponent()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert - Look for main container structure
             Assert.Contains("container py-3", component.Markup);
         }
 
         [Fact]
-        public void sewingPattern_DisplaysCorrectButtonText()
+        public void SewingPattern_DisplaysCorrectButtonText()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert
             Assert.Contains("Generate sewing Pattern", component.Markup);
         }
 
         [Fact]
-        public void sewingPattern_HasBannerComponent()
+        public void SewingPattern_HasBannerComponent()
         {
             // Act
-            var component = RenderComponent<sewingPattern>();
+            var component = RenderComponent<SewingPattern>();
 
             // Assert
             var banners = component.FindAll(".banner, section");
