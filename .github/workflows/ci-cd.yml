@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     if: github.ref == 'refs/heads/master'
-    environment: staging            # Use production here if you want approvals before deploying to staging
+    environment: production            # Use production here if you want approvals before deploying to staging
     permissions:
       contents: read
     steps:
