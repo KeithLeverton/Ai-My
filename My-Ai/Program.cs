@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.ResponseCompression;
 using My_Ai.Components;
 using My_Ai.Services;
+using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>();
     options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>();
 });
+builder.Services.Configure<BrotliCompressionProviderOptions>(o => o.Level = CompressionLevel.SmallestSize);
+builder.Services.Configure<GzipCompressionProviderOptions>(o => o.Level = CompressionLevel.SmallestSize);
 
 builder.Services.AddResponseCaching();
 
@@ -28,10 +32,11 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-    app.UseResponseCompression();
 }
+
+// Apply compression early so it covers static files too
+app.UseResponseCompression();
 
 // Enable response caching
 app.UseResponseCaching();

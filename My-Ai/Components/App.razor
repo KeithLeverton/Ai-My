@@ -12,8 +12,9 @@
     <link rel="manifest" href="/manifest.json" />
 
     <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
     
     <base href="/" />
     
@@ -30,14 +31,30 @@
     <link rel="icon" type="image/png" sizes="32x32" href='@Assets["favicon.png"]' />
     <link rel="apple-touch-icon" href='@Assets["favicon.png"]' />
     
-    <!-- Google AdSense with improved loading -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9127498419225547"
-            crossorigin="anonymous"></script>
-    
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#667eea" />
     
     <HeadOutlet />
+
+    <!-- Load AdSense after first paint/idle to reduce main-thread work -->
+    <script>
+        (function () {
+            function loadAds() {
+                if (document.getElementById('adsbygoogle-js')) return;
+                var s = document.createElement('script');
+                s.id = 'adsbygoogle-js';
+                s.async = true;
+                s.crossOrigin = 'anonymous';
+                s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9127498419225547';
+                document.head.appendChild(s);
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(loadAds, { timeout: 2000 });
+            } else {
+                window.addEventListener('load', loadAds, { once: true });
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -54,8 +71,18 @@
         <span class="dismiss">🗙</span>
     </div>
 
-    <!-- Blazor script with defer for better performance -->
-    <script src="_framework/blazor.web.js" defer></script>
+    <!-- Defer Blazor bootstrap to idle/load to cut TBT on mobile -->
+    <script src="_framework/blazor.web.js" autostart="false"></script>
+    <script>
+        (function () {
+            function startBlazor() { window.Blazor && window.Blazor.start(); }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(startBlazor, { timeout: 1500 });
+            } else {
+                window.addEventListener('load', startBlazor, { once: true });
+            }
+        })();
+    </script>
 </body>
 
 </html>
