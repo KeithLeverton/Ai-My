@@ -48,9 +48,35 @@ app.Use(async (context, next) =>
     var imgSrc = "img-src 'self' data: https:; ";
     var styleSrc = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
     var fontSrc = "font-src 'self' https://fonts.gstatic.com; ";
-    var scriptSrc = "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; ";
-    var scriptSrcElem = "script-src-elem 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; ";
-    var frameSrc = "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com; ";
+
+    // Allow SODAR from adtrafficquality.google (apex + wildcard)
+    var scriptSrc =
+        "script-src 'self' 'unsafe-inline' " +
+        "https://pagead2.googlesyndication.com " +
+        "https://fundingchoicesmessages.google.com " +
+        "https://www.google.com " +
+        "https://www.gstatic.com " +
+        "https://tpc.googlesyndication.com " +
+        "https://googleads.g.doubleclick.net " +
+        "https://adtrafficQuality.google https://*.adtrafficQuality.google; ";
+
+    var scriptSrcElem =
+        "script-src-elem 'self' 'unsafe-inline' " +
+        "https://pagead2.googlesyndication.com " +
+        "https://fundingchoicesmessages.google.com " +
+        "https://www.google.com " +
+        "https://www.gstatic.com " +
+        "https://tpc.googlesyndication.com " +
+        "https://googleads.g.doubleclick.net " +
+        "https://adtrafficQuality.google https://*.adtrafficQuality.google; ";
+
+    var frameSrc =
+        "frame-src 'self' " +
+        "https://googleads.g.doubleclick.net " +
+        "https://tpc.googlesyndication.com " +
+        "https://pagead2.googlesyndication.com " +
+        "https://fundingchoicesmessages.google.com " +
+        "https://www.google.com; ";
 
     // Connect sources differ for Dev vs Prod to support WebSockets
     var connectSrcCommon =
@@ -60,21 +86,11 @@ app.Use(async (context, next) =>
         "https://www.google.com " +
         "https://googleads.g.doubleclick.net " +
         "https://tpc.googlesyndication.com " +
-        // Add SODAR/ad traffic quality endpoints (need both apex and wildcard)
-        "https://adtrafficquality.google https://*.adtrafficQuality.google";
+        "https://adtrafficQuality.google https://*.adtrafficQuality.google";
 
-    string connectSrc;
-
-    if (app.Environment.IsDevelopment())
-    {
-        // Allow WebSockets for hot reload and Blazor Server in dev
-        connectSrc = $"connect-src{connectSrcCommon} ws: wss: wss://localhost:*; ";
-    }
-    else
-    {
-        // Allow secure WebSockets in production (same-origin Blazor Server)
-        connectSrc = $"connect-src{connectSrcCommon} wss:; ";
-    }
+    string connectSrc = app.Environment.IsDevelopment()
+        ? $"connect-src{connectSrcCommon} ws: wss: wss://localhost:*; "
+        : $"connect-src{connectSrcCommon} wss:; ";
 
     context.Response.Headers["Content-Security-Policy"] =
         defaultSrc + baseUri + imgSrc + styleSrc + fontSrc + connectSrc + scriptSrc + scriptSrcElem + frameSrc;
