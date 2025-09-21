@@ -53,7 +53,16 @@ app.Use(async (context, next) =>
     var frameSrc = "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com; ";
 
     // Connect sources differ for Dev vs Prod to support WebSockets
-    var connectSrcCommon = " 'self' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com";
+    var connectSrcCommon =
+        " 'self' " +
+        "https://pagead2.googlesyndication.com " +
+        "https://fundingchoicesmessages.google.com " +
+        "https://www.google.com " +
+        "https://googleads.g.doubleclick.net " +
+        "https://tpc.googlesyndication.com " +
+        // Add SODAR/ad traffic quality endpoints (need both apex and wildcard)
+        "https://adtrafficquality.google https://*.adtrafficQuality.google";
+
     string connectSrc;
 
     if (app.Environment.IsDevelopment())
