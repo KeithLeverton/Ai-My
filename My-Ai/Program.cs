@@ -49,7 +49,7 @@ app.Use(async (context, next) =>
     var styleSrc = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
     var fontSrc = "font-src 'self' https://fonts.gstatic.com; ";
 
-    // Allow SODAR from adtrafficquality.google (apex + wildcard)
+    // Allow SODAR from adtrafficquality.google (apex + wildcard, all lowercase)
     var scriptSrc =
         "script-src 'self' 'unsafe-inline' " +
         "https://pagead2.googlesyndication.com " +
@@ -58,7 +58,7 @@ app.Use(async (context, next) =>
         "https://www.gstatic.com " +
         "https://tpc.googlesyndication.com " +
         "https://googleads.g.doubleclick.net " +
-        "https://adtrafficQuality.google https://*.adtrafficQuality.google; ";
+        "https://adtrafficquality.google https://*.adtrafficquality.google; ";
 
     var scriptSrcElem =
         "script-src-elem 'self' 'unsafe-inline' " +
@@ -76,7 +76,8 @@ app.Use(async (context, next) =>
         "https://tpc.googlesyndication.com " +
         "https://pagead2.googlesyndication.com " +
         "https://fundingchoicesmessages.google.com " +
-        "https://www.google.com; ";
+        "https://www.google.com " +
+        "https://adtrafficQuality.google https://*.adtrafficQuality.google; ";
 
     // Connect sources differ for Dev vs Prod to support WebSockets
     var connectSrcCommon =
