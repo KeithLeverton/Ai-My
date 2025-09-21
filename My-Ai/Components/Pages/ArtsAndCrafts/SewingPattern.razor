@@ -113,7 +113,7 @@
                 ContentType = imageFile.ContentType
             };
 
-            result = await Processor.ProcessImageAsync(formFile, Prompts.sewingPatternPrompt);
+            result = await Processor.ProcessImageAsync(formFile, Prompts.SewingPrompt);
         }
         catch (Exception ex)
         {
