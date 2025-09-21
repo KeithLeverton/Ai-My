@@ -38,7 +38,7 @@ namespace My_Ai.BlazorTests.Components.Layout
 
             // Assert - Check for the text content of NavMenuLink components
             Assert.Contains("Colouring Page", component.Markup);
-            Assert.Contains("sewing Pattern", component.Markup);
+            Assert.Contains("Sewing Pattern", component.Markup);
         }
 
         [Fact]
