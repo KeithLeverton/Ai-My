@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.ResponseCompression;
 using My_Ai.Components;
 using My_Ai.Services;
+using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +21,7 @@ builder.Services.AddResponseCaching();
 
 // minimal DI
 builder.Services.AddScoped<IClient, ChatGPTClient>();
-builder.Services.AddScoped<IImageClient, OpenAIImageGenerationClient>();    
+builder.Services.AddScoped<IImageClient, OpenAIImageGenerationClient>();
 builder.Services.AddScoped<IProcessRequest, ProcessRequest>();
 
 var app = builder.Build();
@@ -28,7 +30,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
     app.UseResponseCompression();
 }
@@ -37,6 +38,22 @@ if (!app.Environment.IsDevelopment())
 app.UseResponseCaching();
 
 app.UseHttpsRedirection();
+
+// Content Security Policy (moved earlier so it applies to static files and pages)
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["Content-Security-Policy"] =
+        "default-src 'self'; " +
+        "base-uri 'self'; " +
+        "img-src 'self' data: https:; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+        "font-src 'self' https://fonts.gstatic.com; " +
+        "connect-src 'self' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; " +
+        "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; " +
+        "script-src-elem 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; " +
+        "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com; ";
+    await next();
+});
 
 // Add static file caching headers
 app.UseStaticFiles(new StaticFileOptions
@@ -53,19 +70,5 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
-// Add CSP headers for security
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Append("Content-Security-Policy",
-        "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; " +
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-        "font-src 'self' https://fonts.gstatic.com; " +
-        "img-src 'self' data: https:; " +
-        "connect-src 'self';");
-
-    await next();
-});
 
 app.Run();
