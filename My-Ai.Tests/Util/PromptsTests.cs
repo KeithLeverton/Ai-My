@@ -11,8 +11,8 @@ namespace My_Ai.Tests.Util
             Assert.NotNull(Prompts.ImproveCv);
             Assert.NotNull(Prompts.CustomiseCv);
             Assert.NotNull(Prompts.GenerateCoverLetter);
-            Assert.NotNull(Prompts.PaintByNumbers);
-            Assert.NotNull(Prompts.sewingPrompt);
+            Assert.NotNull(Prompts.ColouringPage);
+            Assert.NotNull(Prompts.SewingPrompt);
         }
 
         [Fact]
@@ -43,18 +43,18 @@ namespace My_Ai.Tests.Util
         public void PaintByNumbers_ContainsExpectedContent()
         {
             // Assert - Updated to match actual content
-            Assert.Contains("coloring page", Prompts.PaintByNumbers);
-            Assert.Contains("black-and-white", Prompts.PaintByNumbers);
-            Assert.Contains("outlines", Prompts.PaintByNumbers);
+            Assert.Contains("coloring page", Prompts.ColouringPage);
+            Assert.Contains("black-and-white", Prompts.ColouringPage);
+            Assert.Contains("outlines", Prompts.ColouringPage);
         }
 
         [Fact]
         public void sewingPrompt_ContainsExpectedContent()
         {
             // Assert
-            Assert.Contains("sewing pattern", Prompts.sewingPrompt);
-            Assert.Contains("garment", Prompts.sewingPrompt);
-            Assert.Contains("pattern pieces", Prompts.sewingPrompt);
+            Assert.Contains("sewing pattern", Prompts.SewingPrompt);
+            Assert.Contains("garment", Prompts.SewingPrompt);
+            Assert.Contains("pattern pieces", Prompts.SewingPrompt);
         }
     }
 }

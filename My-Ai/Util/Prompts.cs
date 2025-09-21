@@ -15,7 +15,7 @@ The CV is attached and the job description is: {0}";
         public static string GenerateCoverLetter = @"You are an expert in writing cover letters. 
 Please write a cover letter customised to the job description provided. The CV is attached and the job description is: {0}";
 
-        public static string PaintByNumbers = @"Turn a photo into a simple black-and-white coloring page by extracting clear outlines of all major shapes, people, objects, and important details. Remove background clutter, textures, colors, and small details, focusing only on bold, easily colorable areas suitable for children. Exclude any shading or grayscale; output only crisp and simple line art so the final image is clean, uncluttered, and ready for coloring.
+        public static string ColouringPage = @"Turn a photo into a simple black-and-white coloring page by extracting clear outlines of all major shapes, people, objects, and important details. Remove background clutter, textures, colors, and small details, focusing only on bold, easily colorable areas suitable for children. Exclude any shading or grayscale; output only crisp and simple line art so the final image is clean, uncluttered, and ready for coloring.
 
 **Detailed Steps:**
 - Identify all main subjects in the photo (people, animals, prominent objects).
@@ -49,7 +49,7 @@ A simple coloring page of a sitting dog. The dog is outlined with bold lines, an
 **REMINDER:**  
 Your goal is to produce a simple, uncluttered line-art version of the photo, ready for children to color, with only essential shapes and outlines.";
 
-        public static string sewingPrompt = @"Convert this garment into a detailed sewing pattern. Extract the structure of the clothing and redraw it as flat pattern pieces with clean black line art on a white background. Show front and back pieces, sleeves, collars, and any additional components. Include seam allowances, grainline arrows, notches, and fold lines. Present the output as a professional sewing pattern sheet, clearly labeled for cutting and assembly.";
+        public static string SewingPrompt = @"Convert this garment into a detailed sewing pattern. Extract the structure of the clothing and redraw it as flat pattern pieces with clean black line art on a white background. Show front and back pieces, sleeves, collars, and any additional components. Include seam allowances, grainline arrows, notches, and fold lines. Present the output as a professional sewing pattern sheet, clearly labeled for cutting and assembly.";
     }
 
     
