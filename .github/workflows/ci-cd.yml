@@ -6,7 +6,6 @@ on:
   push:
     branches: [ master ]
 
-# Add permissions for the GITHUB_TOKEN
 permissions:
   contents: read
   pull-requests: write
