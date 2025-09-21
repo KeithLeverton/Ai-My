@@ -39,19 +39,37 @@ app.UseResponseCaching();
 
 app.UseHttpsRedirection();
 
-// Content Security Policy (moved earlier so it applies to static files and pages)
+// Content Security Policy (before static files/endpoints)
 app.Use(async (context, next) =>
 {
+    // Common directives
+    var defaultSrc = "default-src 'self'; ";
+    var baseUri = "base-uri 'self'; ";
+    var imgSrc = "img-src 'self' data: https:; ";
+    var styleSrc = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; ";
+    var fontSrc = "font-src 'self' https://fonts.gstatic.com; ";
+    var scriptSrc = "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; ";
+    var scriptSrcElem = "script-src-elem 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; ";
+    var frameSrc = "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com; ";
+
+    // Connect sources differ for Dev vs Prod to support WebSockets
+    var connectSrcCommon = " 'self' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com";
+    string connectSrc;
+
+    if (app.Environment.IsDevelopment())
+    {
+        // Allow WebSockets for hot reload and Blazor Server in dev
+        connectSrc = $"connect-src{connectSrcCommon} ws: wss: wss://localhost:*; ";
+    }
+    else
+    {
+        // Allow secure WebSockets in production (same-origin Blazor Server)
+        connectSrc = $"connect-src{connectSrcCommon} wss:; ";
+    }
+
     context.Response.Headers["Content-Security-Policy"] =
-        "default-src 'self'; " +
-        "base-uri 'self'; " +
-        "img-src 'self' data: https:; " +
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-        "font-src 'self' https://fonts.gstatic.com; " +
-        "connect-src 'self' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; " +
-        "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; " +
-        "script-src-elem 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com https://www.gstatic.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net; " +
-        "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com https://www.google.com; ";
+        defaultSrc + baseUri + imgSrc + styleSrc + fontSrc + connectSrc + scriptSrc + scriptSrcElem + frameSrc;
+
     await next();
 });
 

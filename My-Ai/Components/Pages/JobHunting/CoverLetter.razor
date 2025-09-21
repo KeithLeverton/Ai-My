@@ -80,9 +80,8 @@
     private void OnFileSelected(InputFileChangeEventArgs e)
     {
         errorMessage = null;
-        isProcessing = true;
         cvFile = e.File;
-        
+
         // Validate file size
         const long maxFileSize = 10 * 1024 * 1024; // 10MB
         if (cvFile.Size > maxFileSize)
@@ -92,7 +91,11 @@
             return;
         }
 
-        var allowedTypes = new[] { "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "text/plain" };
+        var allowedTypes = new[] {
+            "application/pdf",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "text/plain"
+        };
         if (!allowedTypes.Contains(cvFile.ContentType))
         {
             errorMessage = "Please select a PDF, DOCX, or TXT file.";
@@ -147,7 +150,7 @@
         while (len >= 1024 && order < sizes.Length - 1)
         {
             order++;
-            len = len / 1024;
+            len /= 1024;
         }
         return $"{len:0.##} {sizes[order]}";
     }

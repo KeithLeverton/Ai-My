@@ -57,7 +57,7 @@
     }
 </div>
 
-<LoadingSpinner IsVisible="@isProcessing" Message="Creating your colouring page..." />
+<LoadingSpinner IsVisible="@isProcessing" Message="Creating your sewing pattern..." />
 
 @code {
     private IBrowserFile? imageFile;
@@ -113,7 +113,7 @@
                 ContentType = imageFile.ContentType
             };
 
-            result = await Processor.ProcessImageAsync(formFile, Prompts.sewingPrompt);
+            result = await Processor.ProcessImageAsync(formFile, Prompts.SewingPrompt);
         }
         catch (Exception ex)
         {
@@ -134,7 +134,7 @@
         while (len >= 1024 && order < sizes.Length - 1)
         {
             order++;
-            len = len / 1024;
+            len /= 1024;
         }
         return $"{len:0.##} {sizes[order]}";
     }
