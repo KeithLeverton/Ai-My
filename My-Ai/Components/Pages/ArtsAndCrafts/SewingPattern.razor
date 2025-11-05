@@ -19,7 +19,7 @@
 <div class="container py-3">
     <div class="mb-3">
         <label class="form-label">Upload your image</label>
-        <InputFile OnChange="OnFileSelected" accept=".jpg,.png" />
+        <InputFile OnChange="OnFileSelected" accept=".jpg,.png" aria-label="Upload image for sewing pattern" />
         @if (!string.IsNullOrEmpty(errorMessage))
         {
             <div class="alert alert-danger mt-2">@errorMessage</div>
@@ -55,6 +55,32 @@
             </div>
         </div>
     }
+
+    <section class="mt-4 tool-instructions" aria-label="Sewing Pattern instructions">
+        <details class="faq-accordion" aria-label="Sewing Pattern Instructions">
+            <summary role="button" aria-expanded="false" aria-controls="sewing-instructions" id="sewing-instructions-summary">Instructions & Tips</summary>
+            <div id="sewing-instructions" role="region" aria-labelledby="sewing-instructions-summary">
+                <h2>How it works</h2>
+                <ol>
+                    <li>Upload a front-facing clothing photo (JPG or PNG up to 10MB).</li>
+                    <li>We detect edges and shapes to draft an outline pattern.</li>
+                    <li>Use the output as a prototype; adjust with test fabric.</li>
+                </ol>
+
+                <h3>Image requirements</h3>
+                <ul>
+                    <li>Well-lit images with minimal background work best.</li>
+                    <li>Include a known-width reference for better scale.</li>
+                </ul>
+
+                <h3>Tips</h3>
+                <ul>
+                    <li>Start with simple garments; refine for complex details.</li>
+                    <li>Mirror-symmetric photos yield cleaner drafts.</li>
+                </ul>
+            </div>
+        </details>
+    </section>
 </div>
 
 <LoadingSpinner IsVisible="@isProcessing" Message="Creating your sewing pattern..." />
