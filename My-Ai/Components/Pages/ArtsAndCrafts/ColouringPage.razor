@@ -19,7 +19,7 @@
 <div class="container py-3">
     <div class="mb-3">
         <label class="form-label">Upload your image</label>
-        <InputFile OnChange="OnFileSelected" accept=".jpg,.png" />
+        <InputFile OnChange="OnFileSelected" accept=".jpg,.png" aria-label="Upload image for colouring page" />
         @if (!string.IsNullOrEmpty(errorMessage))
         {
             <div class="alert alert-danger mt-2">@errorMessage</div>
@@ -55,6 +55,32 @@
             </div>
         </div>
     }
+
+    <section class="mt-4 tool-instructions" aria-label="Colouring Page instructions">
+        <details class="faq-accordion" aria-label="Colouring Page Instructions">
+            <summary role="button" aria-expanded="false" aria-controls="colouring-instructions" id="colouring-instructions-summary">Instructions & Tips</summary>
+            <div id="colouring-instructions" role="region" aria-labelledby="colouring-instructions-summary">
+                <h2>How it works</h2>
+                <ol>
+                    <li>Upload a JPG or PNG image up to 10MB.</li>
+                    <li>We simplify and enhance edges to produce a printable outline.</li>
+                    <li>Download the result and print for colouring.</li>
+                </ol>
+
+                <h3>Image requirements</h3>
+                <ul>
+                    <li>High-contrast subjects produce the cleanest lines.</li>
+                    <li>Use well-lit photos with minimal background clutter.</li>
+                </ul>
+
+                <h3>Tips</h3>
+                <ul>
+                    <li>Cropped images focusing on the subject work best.</li>
+                    <li>Try different photos to vary detail and complexity.</li>
+                </ul>
+            </div>
+        </details>
+    </section>
 </div>
 
 <LoadingSpinner IsVisible="@isProcessing" Message="Creating your colouring page..." />
@@ -134,7 +160,7 @@
         while (len >= 1024 && order < sizes.Length - 1)
         {
             order++;
-            len = len / 1024;
+            len /= 1024;
         }
         return $"{len:0.##} {sizes[order]}";
     }

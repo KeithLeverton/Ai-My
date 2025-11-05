@@ -19,7 +19,7 @@
 <div class="container py-3" aria-busy="@isProcessing">
     <div class="mb-3">
         <label class="form-label">Upload your CV</label>
-        <InputFile OnChange="OnFileSelected" accept=".pdf,.docx,.txt" />
+        <InputFile OnChange="OnFileSelected" accept=".pdf,.docx,.txt" aria-label="Upload your CV" />
         @if (cvFile != null)
         {
             <div class="mt-2">
@@ -53,6 +53,36 @@
             </div>
         </div>
     }
+
+    <section class="mt-4 tool-instructions" aria-label="Review CV instructions">
+        <details class="faq-accordion" aria-label="Review CV Instructions">
+            <summary role="button" aria-expanded="false" aria-controls="reviewcv-instructions" id="reviewcv-instructions-summary">Instructions & Tips</summary>
+            <div id="reviewcv-instructions" role="region" aria-labelledby="reviewcv-instructions-summary">
+                <h2>How it works</h2>
+                <ol>
+                    <li>Upload your CV as PDF, DOCX or TXT (max 10MB).</li>
+                    <li>We analyse structure, clarity, impact and keyword alignment.</li>
+                    <li>You receive prioritized suggestions with example rewrites.</li>
+                </ol>
+
+                <h3>File requirements</h3>
+                <ul>
+                    <li>Accepted: .pdf, .docx, .txt up to 10MB.</li>
+                    <li>Use text-based CVs for best results (avoid scanned images).</li>
+                </ul>
+
+                <h3>Tips for best results</h3>
+                <ul>
+                    <li>Tailor your CV to a target role; quantify achievements.</li>
+                    <li>Use clear headings and consistent formatting.</li>
+                    <li>Paste the target job description when using Customise CV.</li>
+                </ul>
+
+                <h3>Privacy and safety</h3>
+                <p>Do not upload sensitive information. See our <a href="/privacy">Privacy Policy</a> for details.</p>
+            </div>
+        </details>
+    </section>
 </div>
 
 <LoadingSpinner IsVisible="@isProcessing" Message="Reviewing your CV..." />
