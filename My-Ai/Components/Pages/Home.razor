@@ -10,8 +10,8 @@
     </header>
 
     <section class="services-section">
-        <details class="expandable-section job-applications-section" open>
-            <summary role="button" aria-expanded="true" aria-controls="job-apps-content">
+        <details class="expandable-section job-applications-section" open aria-label="Job Applications accordion">
+            <summary id="job-apps-summary" role="button" aria-expanded="true" aria-controls="job-apps-content">
                 <span class="section-title">Job Applications</span>
             </summary>
             <div id="job-apps-content" class="page-tiles" role="region" aria-labelledby="job-apps-summary">
@@ -35,8 +35,8 @@
             </div>
         </details>
 
-        <details class="expandable-section arts-and-crafts-section" open>
-            <summary role="button" aria-expanded="true" aria-controls="arts-crafts-content">
+        <details class="expandable-section arts-and-crafts-section" open aria-label="Arts and Crafts Applications accordion">
+            <summary id="arts-crafts-summary" role="button" aria-expanded="true" aria-controls="arts-crafts-content">
                 <span class="section-title">Arts and Crafts Applications</span>
             </summary>
             <div id="arts-crafts-content" class="page-tiles" role="region" aria-labelledby="arts-crafts-summary">
@@ -51,6 +51,44 @@
                     <div class="tile-title">Sewing Pattern</div>
                     <div class="tile-description" id="sewing-desc">Create sewing patterns from clothing images</div>
                 </a>
+            </div>
+        </details>
+    </section>
+
+    <section class="faqs-section" aria-label="Frequently Asked Questions">
+        <details class="faq-accordion" aria-label="Tool FAQs">
+            <summary role="button" aria-expanded="false" aria-controls="faqs-content" id="faqs-summary">FAQs</summary>
+            <div id="faqs-content" role="region" aria-labelledby="faqs-summary">
+                <h3>Review CV</h3>
+                <ul>
+                    <li><strong>What file types are supported?</strong> PDF, DOCX, and TXT up to 10MB.</li>
+                    <li><strong>Is my data stored?</strong> Files are processed to generate feedback; avoid sensitive data. See the Privacy page for details.</li>
+                    <li><strong>How do I get best results?</strong> Use a clean, text-based CV and a clear target role or job description.</li>
+                </ul>
+                <h3>Cover Letter</h3>
+                <ul>
+                    <li><strong>Do I need a job description?</strong> Yes, provide a JD or role summary to tailor the letter.</li>
+                    <li><strong>Can I change tone or length?</strong> Yes, you can refine and regenerate with guidance.</li>
+                    <li><strong>Which languages are supported?</strong> English is best; other languages may vary in quality.</li>
+                </ul>
+                <h3>Customise CV</h3>
+                <ul>
+                    <li><strong>What should I upload?</strong> Your current CV and the target job description.</li>
+                    <li><strong>What output do I get?</strong> Actionable edits, suggested bullet points, and skill alignment tips.</li>
+                    <li><strong>Can I export the result?</strong> Copy the suggestions and apply them to your CV editor of choice.</li>
+                </ul>
+                <h3>Colouring Page</h3>
+                <ul>
+                    <li><strong>What images work best?</strong> High-contrast photos with clear subjects produce cleaner lines.</li>
+                    <li><strong>What is the size limit?</strong> Up to 10MB. Use JPG or PNG.</li>
+                    <li><strong>What do I get back?</strong> A black-and-white image ready to print and color.</li>
+                </ul>
+                <h3>Sewing Pattern</h3>
+                <ul>
+                    <li><strong>How accurate are the patterns?</strong> Suitable for prototyping; always adjust with test fabric.</li>
+                    <li><strong>What images should I use?</strong> Well-lit, front-facing photos with minimal background clutter.</li>
+                    <li><strong>Do you include measurements?</strong> Provide a reference (e.g., known width) for better scale guidance.</li>
+                </ul>
             </div>
         </details>
     </section>
