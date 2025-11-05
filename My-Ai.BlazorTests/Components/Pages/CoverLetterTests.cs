@@ -72,5 +72,17 @@ namespace My_Ai.BlazorTests.Components.Pages
             var banners = component.FindAll(".banner, section");
             Assert.True(banners.Count > 0);
         }
+
+        [Fact]
+        public void CoverLetter_HasInstructionAccordion()
+        {
+            // Act
+            var component = RenderComponent<CoverLetter>();
+
+            // Assert - New instruction accordion exists with accessible attributes
+            Assert.Contains("tool-instructions", component.Markup);
+            Assert.Contains("faq-accordion", component.Markup);
+            Assert.Contains("Instructions & Tips", component.Markup);
+        }
     }
 }
