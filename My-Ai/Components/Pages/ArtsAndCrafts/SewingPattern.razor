@@ -1,4 +1,4 @@
-﻿@page "/sewingPattern"
+﻿@page "/SewingPattern"
 @rendermode InteractiveServer
 @using My_Ai.Components.Shared
 @using My_Ai.Services
@@ -6,9 +6,9 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Http
 
-<PageTitle>sewingPattern</PageTitle>
+<PageTitle>Sewing Pattern</PageTitle>
 
-<Banner Title="sewing Pattern"
+<Banner Title="Sewing Pattern"
         Subtitle="Upload an image of clothes to turn it into a sewing pattern"
         BackgroundImageUrl='@Assets["images/artsandcrafts/paintbrushes.jpg"]'
         BackgroundPosition="center 30%"
@@ -51,7 +51,7 @@
         <div class="card mt-3">
             <div class="card-header">Result</div>
             <div class="card-body">
-                <img src="@result" class="img-fluid" alt="sewing pattern result" />
+                <img src="@result" class="img-fluid" alt="Sewing Pattern result" />
             </div>
         </div>
     }

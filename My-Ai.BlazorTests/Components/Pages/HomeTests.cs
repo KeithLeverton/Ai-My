@@ -112,5 +112,18 @@ namespace My_Ai.BlazorTests.Components.Pages
             Assert.Contains("<section", component.Markup);
             Assert.Contains("services-section", component.Markup);
         }
+
+        [Fact]
+        public void Home_HasFaqAccordionSection()
+        {
+            // Act
+            var component = RenderComponent<Home>();
+
+            // Assert - Check for new FAQ accordion section below tiles
+            Assert.Contains("faqs-section", component.Markup);
+            Assert.Contains("faq-accordion", component.Markup);
+            Assert.Contains("FAQs", component.Markup);
+            Assert.Contains("aria-label=\"Frequently Asked Questions\"", component.Markup);
+        }
     }
 }

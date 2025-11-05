@@ -408,6 +408,64 @@ h1:focus {
     background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%) !important; /* Darker on hover */
 }
 
+/* FAQ Accordion Styling */
+.faqs-section {
+    margin-top: 2rem;
+}
+
+.faq-accordion {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+}
+
+.faq-accordion summary {
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    padding: 1.25rem 1.75rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faq-accordion summary:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.faq-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-accordion summary::after {
+    content: "▼";
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    transition: transform 0.3s ease;
+    margin-left: auto;
+}
+
+.faq-accordion:not([open]) summary::after {
+    transform: rotate(-90deg);
+}
+
+.faq-accordion summary::before {
+    content: "❓";
+    font-size: 1.2rem;
+    margin-right: 0.75rem;
+}
+
+#faqs-content {
+    padding: 1.25rem 1.75rem 1.5rem;
+}
+
 /* Alternative color schemes - uncomment the one you prefer */
 
 /* Option 1: Green Theme */
